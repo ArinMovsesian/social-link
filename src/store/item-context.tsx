@@ -10,7 +10,7 @@ type ItemContextObj = {
 };
 export const ItemContext = React.createContext<ItemContextObj>({
   items: [],
-  item: {},
+  item: null,
   addItem: () => {},
   removeItem: (id: string) => {},
   changeItem: (id: string) => {},
@@ -18,7 +18,7 @@ export const ItemContext = React.createContext<ItemContextObj>({
 
 const ItemContextProvider: React.FC = (props) => {
   const [Items, setItems] = useState<Item[]>([]);
-  const [Item, setItem] = useState<any>({});
+  const [Item, setItem] = useState<any>(null);
 
   const addItemHandler = (item: Item) => {
     console.log(item);
@@ -39,7 +39,8 @@ const ItemContextProvider: React.FC = (props) => {
         return item.id == id
       }
     )
-    setItem(item);
+    const newRef: any = {...item};
+    setItem(newRef);
   }
   const contextValue: ItemContextObj = {
     items: Items,

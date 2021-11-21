@@ -27,10 +27,7 @@ const AddItem: React.FC<{
   onCloseCollapse: () => void;
 }> = (props) => {
   console.log("AddItem");
-  // const [currency, setCurrency] = React.useState("instagram");
   const itemCtx = React.useContext(ItemContext);
- 
-  const forceUp = React.useState("")[1];
   React.useEffect(() => {
     // alert(itemCtx.item.id)
     console.log("useEffect", itemCtx.item, formik);
@@ -44,7 +41,7 @@ const AddItem: React.FC<{
        })
     }
     return () => {};
-  }, [itemCtx.item]);
+  }, [itemCtx]);
   const formik = useFormik({
     initialValues: {
       id: "",
