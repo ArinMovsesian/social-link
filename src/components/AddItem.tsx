@@ -4,10 +4,11 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useFormik } from "formik";
+import { useFormik, useFormikContext } from "formik";
 import { ItemContext } from "../store/item-context";
 import Item from "../models/Item";
 import { CalendarTodayTwoTone } from "@mui/icons-material";
+import { debug } from "console";
 const currencies = [
   {
     value: "instagram",
@@ -25,16 +26,32 @@ const currencies = [
 const AddItem: React.FC<{
   onCloseCollapse: () => void;
 }> = (props) => {
+  console.log("AddItem");
   // const [currency, setCurrency] = React.useState("instagram");
   const itemCtx = React.useContext(ItemContext);
-
+ 
+  const forceUp = React.useState("")[1];
+  React.useEffect(() => {
+    // alert(itemCtx.item.id)
+    console.log("useEffect", itemCtx.item, formik);
+    
+    // debugger;
+      if(itemCtx.item) {
+       formik.setValues({
+         id: itemCtx.item.id,
+         link: itemCtx.item.link,
+         type:itemCtx.item.type
+       })
+    }
+    return () => {};
+  }, [itemCtx.item]);
   const formik = useFormik({
     initialValues: {
       id: "",
       link: "",
       type: "",
     },
-    onSubmit: (values,actions) => {
+    onSubmit: (values, actions) => {
       // alert(JSON.stringify(values));
       console.log("submit", values);
 
@@ -56,23 +73,16 @@ const AddItem: React.FC<{
         actions.resetForm({
           values: {
             // the type of `values` inferred to be Blog
-            id: '',
-            link: '',
-            type: '',
+            id: "",
+            link: "",
+            type: "",
           },
           // you can also set the other form states here
         });
       }
     },
   });
-  React.useEffect(() => {
-    // alert(itemCtx.item.id)
-    console.log('useEffect',itemCtx.item);
-   
-    return () => {
 
-    };
-  }, [itemCtx.item]);
   const closeCollapseHandler = (resetForm: any) => {
     props.onCloseCollapse();
     resetForm();
@@ -124,7 +134,10 @@ const AddItem: React.FC<{
         <Button variant="contained" type="submit">
           ثبت مسیر ارتباطی
         </Button>
-        <Button variant="outlined" onClick={closeCollapseHandler.bind(null,formik.handleReset)}>
+        <Button
+          variant="outlined"
+          onClick={closeCollapseHandler.bind(null, formik.handleReset)}
+        >
           انصراف
         </Button>
       </Stack>

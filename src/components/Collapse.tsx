@@ -62,7 +62,7 @@ const Collapse = () => {
           </Button>
         </AccordionSummary>
         <AccordionDetails>
-          <AddItem onCloseCollapse={closeCollapseHandler} />
+          <AddItem onCloseCollapse={closeCollapseHandler}/>
         </AccordionDetails>
       </Accordion>
     </div>
