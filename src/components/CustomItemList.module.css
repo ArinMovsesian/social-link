@@ -1,0 +1,23 @@
+.CustomItemListFuncContainer {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+.CustomItemListFuncContainer li {
+  display: inline-block;
+  margin: 5px;
+}
+.CustomItemListDisplayContainer {
+  list-style-type: none;
+  padding: 0;
+  text-align: right;
+}
+.CustomItemListDisplayContainer li {
+    display: inline-block;
+    margin: 5px;
+  }
+  .CustomItemListContainer {
+      background-color:darkgray;
+      border-radius: 5px;
+      margin-top: 20px;
+  }
