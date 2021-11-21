@@ -45,6 +45,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Collapse = () => {
   const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [editMode, setEditMode] = React.useState<boolean>(false);
 
   const openCollapseHandler = () => {
     setExpanded(true);
@@ -52,17 +53,25 @@ const Collapse = () => {
   const closeCollapseHandler = () => {
     setExpanded(false);
   };
-
+  const changeTitleHandler = (flag: boolean) => {
+    setEditMode(flag);
+  }
+  let collaspeTitle = 'افزودن مسیر ارتباطی';
+  if(editMode) {
+    collaspeTitle = 'ویرایش مسیر ارتباطی';
+  }
   return (
     <div>
       <Accordion expanded={expanded}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Button startIcon={<AddIcon />} onClick={openCollapseHandler}>
-            افزودن مسیر ارتباطی
+            {
+             collaspeTitle
+            }
           </Button>
         </AccordionSummary>
         <AccordionDetails>
-          <AddItem onCloseCollapse={closeCollapseHandler}/>
+          <AddItem onCloseCollapse={closeCollapseHandler} onOpenCollapse={openCollapseHandler} changeTitle={changeTitleHandler}/>
         </AccordionDetails>
       </Accordion>
     </div>

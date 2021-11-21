@@ -25,23 +25,30 @@ const currencies = [
 ];
 const AddItem: React.FC<{
   onCloseCollapse: () => void;
+  onOpenCollapse: () => void;
+  changeTitle: (flag: boolean) => void
 }> = (props) => {
   console.log("AddItem");
   const itemCtx = React.useContext(ItemContext);
+  const [btnTitle, setBtnTitle] = React.useState<string>('');
   React.useEffect(() => {
     // alert(itemCtx.item.id)
     console.log("useEffect", itemCtx.item, formik);
     
     // debugger;
       if(itemCtx.item) {
+        
        formik.setValues({
          id: itemCtx.item.id,
          link: itemCtx.item.link,
          type:itemCtx.item.type
-       })
+       });
+       props.changeTitle(true);
+       props.onOpenCollapse();
+       setBtnTitle('ویرایش مسیر ارتباطی' + itemCtx.item.type);
     }
     return () => {};
-  }, [itemCtx]);
+  }, [itemCtx.item]);
   const formik = useFormik({
     initialValues: {
       id: "",
@@ -54,6 +61,23 @@ const AddItem: React.FC<{
 
       if (!values.type || !values.link || !values.id) {
         alert("همه مقادیر پر شود.");
+        return;
+      }
+      if (btnTitle) {
+        itemCtx.changeItem(values);
+        actions.resetForm({
+          values: {
+            // the type of `values` inferred to be Blog
+            id: "",
+            link: "",
+            type: "",
+          },
+         
+          // you can also set the other form states here
+        });
+        props.changeTitle(false);
+        setBtnTitle('');
+        props.onCloseCollapse();
         return;
       }
       const existItem = itemCtx.items.find((item: Item) => {
@@ -74,17 +98,26 @@ const AddItem: React.FC<{
             link: "",
             type: "",
           },
+         
           // you can also set the other form states here
         });
+        props.onCloseCollapse();
+        props.changeTitle(false);
+        setBtnTitle('');
       }
     },
   });
 
   const closeCollapseHandler = (resetForm: any) => {
     props.onCloseCollapse();
+    props.changeTitle(false);
+    setBtnTitle('');
     resetForm();
   };
-
+  let btn_title = 'ثبت مسیر ارتباطی';
+  if(btnTitle) {
+    btn_title = btnTitle
+  }
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box
@@ -129,7 +162,7 @@ const AddItem: React.FC<{
       </Box>
       <Stack spacing={2} direction="row">
         <Button variant="contained" type="submit">
-          ثبت مسیر ارتباطی
+          {btn_title}
         </Button>
         <Button
           variant="outlined"

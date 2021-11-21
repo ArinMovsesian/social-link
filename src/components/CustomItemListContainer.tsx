@@ -5,7 +5,7 @@ const CustomItemListContainer: React.FC = (props) => {
   const itemCtx = React.useContext(ItemContext);
   console.log("CustomItemListContainer", itemCtx);
   const editItemHandler = (id: string) => {
-    itemCtx.changeItem(id)
+    itemCtx.findItem(id)
   }
   return (
     <div>

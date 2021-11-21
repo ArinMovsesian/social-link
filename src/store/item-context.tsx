@@ -6,14 +6,16 @@ type ItemContextObj = {
   item: any;
   addItem: (item: Item) => void;
   removeItem: (id: string) => void;
-  changeItem: (id: string) => void;
+  findItem: (id: string) => void;
+  changeItem: (item: Item) => void;
 };
 export const ItemContext = React.createContext<ItemContextObj>({
   items: [],
   item: null,
   addItem: () => {},
   removeItem: (id: string) => {},
-  changeItem: (id: string) => {},
+  findItem: (id: string) => {},
+  changeItem: (item: Item) => {},
 });
 
 const ItemContextProvider: React.FC = (props) => {
@@ -32,7 +34,7 @@ const ItemContextProvider: React.FC = (props) => {
       return prevItems.filter((item) => item.id !== id);
     });
   };
-  const changeItemHandler = (id: string) => {
+  const findItemHandler = (id: string) => {
    
     let item = Items.find(
       (item) => {
@@ -42,11 +44,27 @@ const ItemContextProvider: React.FC = (props) => {
     const newRef: any = {...item};
     setItem(newRef);
   }
+  const changeItemHandler = (item: Item) => {
+    // debugger;
+    
+    setItems((prevItems) => {
+      const items = [...prevItems];
+      const index = items.findIndex((ite) => ite.id == item.id);
+      items[index] = {
+        type: item.type,
+        id: item.id,
+        link: item.link
+      }
+      return items
+    });
+
+  }
   const contextValue: ItemContextObj = {
     items: Items,
     item: Item,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
+    findItem: findItemHandler,
     changeItem: changeItemHandler
   };
   return (
