@@ -56,9 +56,9 @@ const Collapse = () => {
   const changeTitleHandler = (flag: boolean) => {
     setEditMode(flag);
   }
-  let collaspeTitle = 'افزودن مسیر ارتباطی';
+  let collaspeTitle = 'Add';
   if(editMode) {
-    collaspeTitle = 'ویرایش مسیر ارتباطی';
+    collaspeTitle = 'Edit';
   }
   return (
     <div>

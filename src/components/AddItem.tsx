@@ -12,15 +12,15 @@ import { debug } from "console";
 const currencies = [
   {
     value: "instagram",
-    label: "ایسنتاگرام",
+    label: "instagram",
   },
   {
     value: "facebook",
-    label: "فیس بود",
+    label: "facebook",
   },
   {
     value: "twitter",
-    label: "توییتر",
+    label: "twitter",
   },
 ];
 const AddItem: React.FC<{
@@ -45,7 +45,7 @@ const AddItem: React.FC<{
        });
        props.changeTitle(true);
        props.onOpenCollapse();
-       setBtnTitle('ویرایش مسیر ارتباطی' + itemCtx.item.type);
+       setBtnTitle('edit ' + itemCtx.item.type);
     }
     return () => {};
   }, [itemCtx.item]);
@@ -60,7 +60,7 @@ const AddItem: React.FC<{
       console.log("submit", values);
 
       if (!values.type || !values.link || !values.id) {
-        alert("همه مقادیر پر شود.");
+        alert("fill all fields!!");
         return;
       }
       if (btnTitle) {
@@ -88,7 +88,7 @@ const AddItem: React.FC<{
         );
       });
       if (existItem) {
-        alert("مقدار تکراری است");
+        alert("exist!!");
       } else {
         itemCtx.addItem(values);
         actions.resetForm({
@@ -114,7 +114,7 @@ const AddItem: React.FC<{
     setBtnTitle('');
     resetForm();
   };
-  let btn_title = 'ثبت مسیر ارتباطی';
+  let btn_title = 'ADD';
   if(btnTitle) {
     btn_title = btnTitle
   }
@@ -132,7 +132,7 @@ const AddItem: React.FC<{
           id="id"
           variant="outlined"
           name="id"
-          label="آی دی"
+          label="id"
           value={formik.values.id}
           onChange={formik.handleChange}
         />
@@ -140,7 +140,7 @@ const AddItem: React.FC<{
           id="link"
           variant="outlined"
           name="link"
-          label="لینک"
+          label="link"
           value={formik.values.link}
           onChange={formik.handleChange}
         />
@@ -148,7 +148,7 @@ const AddItem: React.FC<{
           id="type"
           select
           name="type"
-          label="نوع"
+          label="type"
           value={formik.values.type}
           onChange={formik.handleChange}
           helperText=""
@@ -168,7 +168,7 @@ const AddItem: React.FC<{
           variant="outlined"
           onClick={closeCollapseHandler.bind(null, formik.handleReset)}
         >
-          انصراف
+          CANCEL
         </Button>
       </Stack>
     </form>

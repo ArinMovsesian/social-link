@@ -22,7 +22,6 @@ const CustomItemList: React.FC<{type: string; link: string; id: string; editItem
       soicalType = (
         <>
           <TwitterIcon />
-          <span>توییتر</span>
         </>
       );
       break;
@@ -30,7 +29,6 @@ const CustomItemList: React.FC<{type: string; link: string; id: string; editItem
       soicalType = (
         <>
           <InstagramIcon />
-          <span>ایسنتاگرام</span>
         </>
       );
       break;
@@ -38,7 +36,6 @@ const CustomItemList: React.FC<{type: string; link: string; id: string; editItem
       soicalType = (
         <>
           <FacebookIcon />
-          <span>فیسبوک</span>
         </>
       );
       break;
@@ -62,24 +59,24 @@ const CustomItemList: React.FC<{type: string; link: string; id: string; editItem
         <Grid item xs={6}>
           <ul className={classes.CustomItemListFuncContainer}>
             <li>
-              <Button startIcon={<DeleteIcon />} onClick={openDeleteItemModal}>حذف</Button>
+              <Button startIcon={<DeleteIcon/>} onClick={openDeleteItemModal} color={'error'}>Delete</Button>
             </li>
             <li>
-              <Button startIcon={<EditIcon />} onClick={() => editItemHandler(props.id)}>ویرایش</Button>
+              <Button startIcon={<EditIcon />} onClick={() => editItemHandler(props.id)} color={'warning'}>Edit</Button>
             </li>
           </ul>
         </Grid>
         <Grid item xs={6}>
           <ul className={classes.CustomItemListDisplayContainer}>
-            <li>{soicalType}</li>
             <li>
-              <span>آی دی:</span>
+              <span>id: </span>
               <span>{props.id}</span>
             </li>
             <li>
-              <span>لینک</span>
+              <span>link: </span>
               <span>{props.link}</span>
             </li>
+            <li>{soicalType}</li>
           </ul>
         </Grid>
       </Grid>

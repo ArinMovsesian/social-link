@@ -23,7 +23,7 @@ const DeleteItemModal: React.FC<{open: boolean; handleClose: () => void; link: s
   };
   const removeItemTextHandler = (event: any) => {
     setRemveBtnState(true);
-    if(event.target.value === 'تایید') {
+    if(event.target.value === 'confirm') {
       setRemveBtnState(false);
     }
     setRemoveItemText(event.target.value);
@@ -41,14 +41,15 @@ const DeleteItemModal: React.FC<{open: boolean; handleClose: () => void; link: s
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            آیا از تصمیم خود مطمن هستید؟
+            Are you sure?
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          برای حذف مسیر ارتباطی<span>{props.link}</span> لطفا تایید را بنویسید
+            for delete <span>{props.link}</span> pls enter confirm characters.
+          
           </Typography>
-          <TextField id="deleteSubmit" label="تایید" variant="outlined" fullWidth={true} value={removeItemText} onChange={removeItemTextHandler}/>
-          <Button variant="text" onClick={props.handleClose}>انصراف</Button>
-          <Button variant="text" disabled={removeBtnState} onClick={removeItemHandler}>حذف</Button>
+          <TextField id="deleteSubmit" label="confirm" variant="outlined" fullWidth={true} value={removeItemText} onChange={removeItemTextHandler}/>
+          <Button variant="text" onClick={props.handleClose}>CANCEL</Button>
+          <Button variant="text" disabled={removeBtnState} onClick={removeItemHandler}>DELETE</Button>
         </Box>
       </Modal>
   </div>)

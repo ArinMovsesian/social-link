@@ -13,11 +13,16 @@
   text-align: right;
 }
 .CustomItemListDisplayContainer li {
-    display: inline-block;
-    margin: 5px;
-  }
-  .CustomItemListContainer {
-      background-color:darkgray;
-      border-radius: 5px;
-      margin-top: 20px;
-  }
+  display: inline-block;
+  margin: 5px;
+  direction: rtl;
+  color: white;
+}
+.CustomItemListDisplayContainer li span:first-child {
+  font-weight: bold;
+}
+.CustomItemListContainer {
+  background-color: rgb(114, 114, 114);
+  border-radius: 5px;
+  margin-top: 20px;
+}
